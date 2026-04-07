@@ -1,23 +1,25 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { Breadcrumb } from "@/components/breadcrumb"
+import { ContactForm } from "@/components/contact-form"
+import { Mail, Phone, MapPin, Clock, Facebook } from "lucide-react"
+import { TikTokIcon } from "@/components/tiktok-icon"
 
 const contactInfo = [
   {
     icon: Phone,
     title: "Téléphone",
-    details: ["+237 6XX XXX XXX", "+237 6YY YYY YYY"],
+    details: ["+33 7 45 22 36 64", "+33 7 60 27 08 90"],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["contact@carolinelogistic.com", "support@carolinelogistic.com"],
+    details: ["infocarolinelogistics@gmail.com"],
   },
   {
     icon: MapPin,
     title: "Adresse",
-    details: ["Douala, Cameroun", "Quartier Akwa, Rue XYZ"],
+    details: ["Challans – France", "85300"],
   },
   {
     icon: Clock,
@@ -31,6 +33,11 @@ export default function ContactPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumb items={[
+            { label: "Contact" }
+          ]} />
+        </div>
         {/* Page Header */}
         <section className="bg-muted py-12">
           <div className="container mx-auto px-4">
@@ -71,15 +78,24 @@ export default function ContactPage() {
                 <div className="mt-8 pt-8 border-t border-border">
                   <h3 className="font-semibold text-foreground mb-4">Suivez-nous</h3>
                   <div className="flex gap-3">
-                    {["Facebook", "Instagram", "Twitter"].map((social) => (
-                      <a
-                        key={social}
-                        href="#"
-                        className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-                      >
-                        <span className="text-sm font-bold">{social.charAt(0)}</span>
-                      </a>
-                    ))}
+                    <a
+                      href="https://www.facebook.com/caro.linelogistics"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                      title="Facebook"
+                    >
+                      <Facebook className="w-5 h-5" />
+                    </a>
+                    <a
+                      href="https://www.tiktok.com/@carolinelogisticsfrance?_r=1&_t=ZN-91WYd1l8gXW"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 bg-muted rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                      title="TikTok"
+                    >
+                      <TikTokIcon className="w-5 h-5" />
+                    </a>
                   </div>
                 </div>
               </div>
@@ -92,78 +108,7 @@ export default function ContactPage() {
                     Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais.
                   </p>
 
-                  <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                          Nom complet
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                          placeholder="Votre nom"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                          placeholder="votre@email.com"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-foreground mb-2">
-                        Téléphone
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                        placeholder="+237 6XX XXX XXX"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
-                        Sujet
-                      </label>
-                      <select
-                        id="subject"
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
-                      >
-                        <option value="">Sélectionnez un sujet</option>
-                        <option value="order">Question sur une commande</option>
-                        <option value="product">Information sur un produit</option>
-                        <option value="delivery">Livraison</option>
-                        <option value="partnership">Partenariat</option>
-                        <option value="other">Autre</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        rows={5}
-                        className="w-full px-4 py-3 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
-                        placeholder="Votre message..."
-                      />
-                    </div>
-
-                    <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3">
-                      <Send className="w-4 h-4 mr-2" />
-                      Envoyer le message
-                    </Button>
-                  </form>
+                  <ContactForm />
                 </div>
               </div>
             </div>
@@ -177,7 +122,7 @@ export default function ContactPage() {
               <div className="text-center">
                 <MapPin className="w-12 h-12 text-primary mx-auto mb-2" />
                 <p className="text-muted-foreground">Carte Google Maps</p>
-                <p className="text-sm text-muted-foreground">Douala, Cameroun</p>
+                <p className="text-sm text-muted-foreground">Challans, France 85300</p>
               </div>
             </div>
           </div>

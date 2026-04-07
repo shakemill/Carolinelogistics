@@ -1,6 +1,69 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@keyframes slide-in-from-top-full {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-bottom-full {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-to-right-full {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-in {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.animate-out {
+  animation-duration: 0.2s;
+  animation-fill-mode: both;
+}
+
+.slide-in-from-top-full {
+  animation-name: slide-in-from-top-full;
+}
+
+.slide-in-from-bottom-full {
+  animation-name: slide-in-from-bottom-full;
+}
+
+.slide-out-to-right-full {
+  animation-name: slide-out-to-right-full;
+}
+
+.fade-out-80 {
+  animation-name: fade-out;
+  opacity: 0.8;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -121,5 +184,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  button, [role="button"], a {
+    @apply cursor-pointer;
+  }
+  button:disabled, [role="button"]:disabled, a:disabled {
+    @apply cursor-not-allowed;
   }
 }

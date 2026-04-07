@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { Breadcrumb } from "@/components/breadcrumb"
 import { CheckCircle, Users, Package, Truck, Award, Target, Heart, Zap } from "lucide-react"
 
 const stats = [
@@ -23,7 +24,7 @@ const values = [
   {
     icon: Truck,
     title: "Notre Engagement",
-    description: "Livraison rapide et fiable partout au Cameroun avec un service client réactif et attentionné.",
+    description: "Livraison rapide et fiable partout en France avec un service client réactif et attentionné.",
   },
 ]
 
@@ -39,6 +40,11 @@ export default function AProposPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        <div className="container mx-auto px-4 py-4">
+          <Breadcrumb items={[
+            { label: "À Propos" }
+          ]} />
+        </div>
         {/* Page Header */}
         <section className="bg-muted py-12">
           <div className="container mx-auto px-4">
@@ -82,7 +88,7 @@ export default function AProposPage() {
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   Caroline Logistic est née de la vision de rendre le commerce électronique accessible 
-                  à tous au Cameroun. Fondée en 2020, notre entreprise a rapidement grandi pour devenir 
+                  à tous en France. Fondée en 2020, notre entreprise a rapidement grandi pour devenir 
                   une référence dans le secteur e-commerce local.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-6">

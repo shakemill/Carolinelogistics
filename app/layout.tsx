@@ -2,6 +2,10 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SessionProvider } from '@/components/providers/session-provider'
+import { CartProvider } from '@/components/shop/cart-context'
+import { WishlistProvider } from '@/components/shop/wishlist-context'
+import { Toaster } from '@/components/ui/toaster'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -36,9 +40,16 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className={`font-sans antialiased`}>
-        {children}
+        <SessionProvider>
+          <CartProvider>
+            <WishlistProvider>
+              {children}
+            </WishlistProvider>
+          </CartProvider>
+        </SessionProvider>
+        <Toaster />
         <Analytics />
       </body>
     </html>

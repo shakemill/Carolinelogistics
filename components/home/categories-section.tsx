@@ -2,38 +2,22 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
-const categories = [
-  {
-    id: 1,
-    name: "Électronique",
-    description: "Smartphones, accessoires et gadgets",
-    productCount: 45,
-    image: "/images/categories/electronics.jpg",
-  },
-  {
-    id: 2,
-    name: "Mode & Vêtements",
-    description: "Tendances pour hommes et femmes",
-    productCount: 120,
-    image: "/images/categories/fashion.jpg",
-  },
-  {
-    id: 3,
-    name: "Maison & Jardin",
-    description: "Décoration et équipements",
-    productCount: 78,
-    image: "/images/categories/home.jpg",
-  },
-  {
-    id: 4,
-    name: "Beauté & Santé",
-    description: "Cosmétiques et soins",
-    productCount: 56,
-    image: "/images/categories/beauty.jpg",
-  },
-]
+interface Category {
+  id: string
+  name: string
+  slug: string | null
+  image: string | null
+  description: string | null
+  _count?: {
+    products: number
+  }
+}
 
-export function CategoriesSection() {
+interface CategoriesSectionProps {
+  categories?: Category[]
+}
+
+export function CategoriesSection({ categories = [] }: CategoriesSectionProps) {
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -53,31 +37,46 @@ export function CategoriesSection() {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {categories.map((category) => (
-            <Link
-              key={category.id}
-              href={`/categories/${category.id}`}
-              className="group relative rounded-xl overflow-hidden aspect-[4/3] hover:shadow-xl transition-all"
-            >
-              <Image
-                src={category.image || "/placeholder.svg"}
-                alt={category.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                <h3 className="font-semibold text-lg">
-                  {category.name}
-                </h3>
-                <p className="text-sm text-white/80 mt-1">
-                  {category.productCount} produits
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {categories.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {categories.map((category) => {
+              const categorySlug = category.slug || category.id
+              const imageSrc = category.image 
+                ? (category.image.startsWith("http") || category.image.startsWith("/") 
+                    ? category.image 
+                    : `/${category.image}`)
+                : "/placeholder.svg"
+              
+              return (
+                <Link
+                  key={category.id}
+                  href={`/categories/${categorySlug}`}
+                  className="group relative rounded-xl overflow-hidden aspect-[4/3] hover:shadow-xl transition-all"
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={category.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                    <h3 className="font-semibold text-lg">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-white/80 mt-1">
+                      {category._count?.products || 0} produit{category._count?.products !== 1 ? 's' : ''}
+                    </p>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        ) : (
+          <div className="text-center text-muted-foreground py-8">
+            Aucune catégorie disponible
+          </div>
+        )}
 
         {/* Mobile link */}
         <div className="mt-6 text-center sm:hidden">

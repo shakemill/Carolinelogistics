@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { CheckCircle, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const features = [
   "Plus de 5 ans d'expérience",
   "Produits 100% authentiques",
   "Service client réactif",
-  "Livraison dans tout le Cameroun",
+  "Livraison dans toute la France",
 ]
 
 export function AboutPreview() {
@@ -16,13 +17,15 @@ export function AboutPreview() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Image */}
           <div className="relative">
-            <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-              <div className="text-center p-8">
-                <div className="w-24 h-24 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <span className="text-4xl font-bold text-primary">CL</span>
-                </div>
-                <p className="text-muted-foreground">Image À Propos</p>
-              </div>
+            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/about-caroline.png"
+                alt="Caroline Logistic - Votre partenaire logistique pour votre expansion"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
             </div>
             {/* Stats card */}
             <div className="absolute -bottom-6 -right-6 bg-card shadow-xl rounded-xl p-6 border border-border">
